@@ -30,9 +30,16 @@ describe("CrossChainNameService", function () {
     it("should register and lookup alice.ccns", async function () {
         const AliceName = "Alice.ccns";
 
-        // Register the name on the "souce" chain
-        const registerTx = await ccnsRegister.register(AliceName);
-        await registerTx.wait();
+        console.log("Registering with name:", AliceName);
+
+        // Register the name on the "source" chain
+        try {
+            const registerTx = await ccnsRegister.register(AliceName);
+            await registerTx.wait();
+        } catch (error) {
+            console.error("Error calling register:", error);
+            throw error;
+        }
 
         // Lookup the name on the "destination" chain
         const result = await ccnsLookupReceiver.lookup(AliceName);
