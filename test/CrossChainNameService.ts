@@ -44,7 +44,11 @@ describe("CrossChainNameService", function () {
         // Lookup the name on the "destination" chain
         const result = await ccnsLookupReceiver.lookup(AliceName);
 
-        // Assert that the returned address matches Alice's address using Node.js's assert module
+        console.log("Lookup address:", result);
+        console.log("Alice's address:", AliceAddress);
+        console.log("Lookup address equals Alice's address:", result === AliceAddress);
+
+        // Assert that the returned address matches Alice's address using assert module
         assert.equal(result, AliceAddress, "The lookup address should match Alice's address");
     });
 });
